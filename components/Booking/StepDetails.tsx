@@ -94,13 +94,13 @@ export default function StepDetails({ data, setData, next, back }: any) {
              shadow-sm hover:bg-emerald-700 hover:shadow-md 
              transition disabled:opacity-50 disabled:cursor-not-allowed"
 >
-  Confirm Appointment →
+  Confirm →
 </button>
       </div>
     </div>
 
     {confirmOpen && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center">
+  <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
 
     {/* BACKDROP */}
     <div
@@ -109,9 +109,13 @@ export default function StepDetails({ data, setData, next, back }: any) {
     />
 
     {/* MODAL */}
-    <div className="relative bg-white w-[90%] max-w-md rounded-2xl shadow-xl p-6">
+    <div className="relative w-full max-w-lg 
+                    bg-white rounded-2xl shadow-xl 
+                    p-5 sm:p-6 md:p-7 
+                    max-h-[90vh] overflow-y-auto">
 
-      <h3 className="text-lg font-semibold text-gray-900 text-center">
+      {/* TITLE */}
+      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 text-center">
         Confirm Booking
       </h3>
 
@@ -119,29 +123,38 @@ export default function StepDetails({ data, setData, next, back }: any) {
         Are you sure you want to book this appointment?
       </p>
 
-      {/* SUMMARY (premium touch) */}
-      <div className="mt-4 text-sm text-gray-700 space-y-1 bg-gray-50 p-3 rounded-lg">
+      {/* SUMMARY */}
+      <div className="mt-4 text-sm text-gray-700 space-y-2 
+                      bg-gray-50 p-4 rounded-xl">
+
         <p><b>Service:</b> {data.service}</p>
         <p><b>Date:</b> {data.date}</p>
         <p><b>Time:</b> {data.time}</p>
       </div>
 
       {/* ACTIONS */}
-      <div className="flex gap-3 mt-6">
+      <div className="flex flex-col sm:flex-row gap-3 mt-6">
 
+        {/* CANCEL */}
         <button
           onClick={() => setConfirmOpen(false)}
-          className="flex-1 py-2.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
+          className="w-full sm:flex-1 py-3 rounded-lg 
+                     border border-gray-300 text-gray-700 
+                     bg-white hover:bg-gray-50 transition"
         >
           Cancel
         </button>
 
+        {/* CONFIRM */}
         <button
           onClick={() => {
             setConfirmOpen(false);
-            next(); // FINAL SUBMIT
+            next();
           }}
-          className="flex-1 py-2.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700"
+          className="w-full sm:flex-1 py-3 rounded-lg 
+                     bg-emerald-600 text-white 
+                     hover:bg-emerald-700 shadow-sm 
+                     transition"
         >
           Yes, Confirm
         </button>
