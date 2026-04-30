@@ -5,26 +5,19 @@ import { useState } from "react";
 export default function StepZipcode({ data, setData, next, back }: any) {
   const [error, setError] = useState("");
 
-  // Allow only numbers + optional dash
   const handleChange = (e: any) => {
     let value = e.target.value;
 
-    // allow only digits and dash
     value = value.replace(/[^\d-]/g, "");
 
-    // prevent multiple dashes
     if ((value.match(/-/g) || []).length > 1) return;
-
-    // limit length (12345-6789 max 10 chars)
     if (value.length > 10) return;
 
     setData({ ...data, zipcode: value });
 
-    // clear error while typing
     if (error) setError("");
   };
 
-  // Proper validation
   const validate = () => {
     const zipRegex = /^\d{5}(-\d{4})?$/;
 
@@ -37,9 +30,12 @@ export default function StepZipcode({ data, setData, next, back }: any) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow space-y-4">
+    <div className="bg-white p-6 md:p-8 rounded-2xl 
+                    shadow-[0_10px_30px_rgba(0,0,0,0.06)] 
+                    border border-gray-100 space-y-5">
 
-      <h2 className="text-xl font-semibold text-gray-900">
+      {/* TITLE */}
+      <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
         Check Service Availability
       </h2>
 
@@ -50,29 +46,42 @@ export default function StepZipcode({ data, setData, next, back }: any) {
         placeholder="Enter ZIP code (e.g. 90210)"
         value={data.zipcode}
         onChange={handleChange}
-        className={`w-full p-3 rounded-lg border text-gray-900
-          ${error ? "border-red-400" : "border-gray-200"}
-          focus:outline-none focus:ring-2 focus:ring-emerald-500`}
+        className={`w-full px-4 py-3 rounded-lg 
+          bg-white text-gray-900 placeholder-gray-400
+          border ${error ? "border-red-400" : "border-gray-300"}
+          focus:outline-none focus:ring-2 focus:ring-emerald-500 
+          focus:border-emerald-500 transition`}
       />
 
       {/* ERROR */}
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
       {/* ACTIONS */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 pt-2">
+
+        {/* BACK BUTTON */}
         <button
           onClick={back}
-          className="flex-1 border border-gray-200 py-3 rounded-lg hover:bg-gray-50"
+          className="flex-1 py-3 rounded-lg 
+                     border border-gray-300 text-gray-700 
+                     bg-white
+                     hover:bg-gray-50 hover:border-gray-400
+                     transition"
         >
           Back
         </button>
 
+        {/* CHECK BUTTON */}
         <button
           onClick={validate}
-          className="flex-1 bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition"
+          className="flex-1 py-3 rounded-lg 
+                     bg-emerald-600 text-white font-medium
+                     shadow-sm hover:bg-emerald-700 hover:shadow-md 
+                     transition"
         >
           Check →
         </button>
+
       </div>
     </div>
   );

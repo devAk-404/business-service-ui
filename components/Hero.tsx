@@ -85,9 +85,12 @@ export default function Hero() {
    Call Now
 </button>
 
-                        <button 
-  className="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-100"
+                        <button
   onClick={() => router.push("/book")}
+  className="border border-emerald-600 text-emerald-600 
+             px-6 py-3 rounded-lg font-medium
+             hover:bg-emerald-50 active:bg-emerald-100
+             transition"
 >
   Book Appointment
 </button>
