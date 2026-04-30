@@ -100,19 +100,22 @@ export default function StepDetails({ data, setData, next, back }: any) {
     </div>
 
     {confirmOpen && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+  <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-4">
 
-    {/* BACKDROP */}
-    <div
-      className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-      onClick={() => setConfirmOpen(false)}
-    />
+  {/* BACKDROP */}
+  <div
+    className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+    onClick={() => setConfirmOpen(false)}
+  />
 
-    {/* MODAL */}
-    <div className="relative w-full max-w-lg 
-                    bg-white rounded-2xl shadow-xl 
-                    p-5 sm:p-6 md:p-7 
-                    max-h-[90vh] overflow-y-auto">
+  {/* MODAL */}
+  <div className="relative w-full max-w-sm sm:max-w-lg 
+                  bg-white rounded-2xl
+                  shadow-xl 
+                  p-5 sm:p-6 md:p-7
+                  max-h-[85vh] overflow-y-auto
+                  animate-slideUp">
+
 
       {/* TITLE */}
       <h3 className="text-lg sm:text-xl font-semibold text-gray-900 text-center">
@@ -126,7 +129,6 @@ export default function StepDetails({ data, setData, next, back }: any) {
       {/* SUMMARY */}
       <div className="mt-4 text-sm text-gray-700 space-y-2 
                       bg-gray-50 p-4 rounded-xl">
-
         <p><b>Service:</b> {data.service}</p>
         <p><b>Date:</b> {data.date}</p>
         <p><b>Time:</b> {data.time}</p>
@@ -135,26 +137,23 @@ export default function StepDetails({ data, setData, next, back }: any) {
       {/* ACTIONS */}
       <div className="flex flex-col sm:flex-row gap-3 mt-6">
 
-        {/* CANCEL */}
         <button
           onClick={() => setConfirmOpen(false)}
-          className="w-full sm:flex-1 py-3 rounded-lg 
+          className="w-full py-3 rounded-lg 
                      border border-gray-300 text-gray-700 
-                     bg-white hover:bg-gray-50 transition"
+                     bg-white hover:bg-gray-50"
         >
           Cancel
         </button>
 
-        {/* CONFIRM */}
         <button
           onClick={() => {
             setConfirmOpen(false);
             next();
           }}
-          className="w-full sm:flex-1 py-3 rounded-lg 
+          className="w-full py-3 rounded-lg 
                      bg-emerald-600 text-white 
-                     hover:bg-emerald-700 shadow-sm 
-                     transition"
+                     hover:bg-emerald-700 shadow-sm"
         >
           Yes, Confirm
         </button>
