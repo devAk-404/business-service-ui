@@ -20,7 +20,7 @@ export default function BookingSteps({ currentStep }: any) {
           const active = currentStep >= i + 1;
 
           return (
-            <div key={i} className="flex items-center flex-1">
+            <div key={i} className="flex flex-col items-center min-w-[70px]">
 
               {/* STEP */}
               <div className="flex flex-col items-center min-w-[70px]">
