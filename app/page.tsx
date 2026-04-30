@@ -8,10 +8,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhyChooseUs from "@/components/WhyChooseus";
 import ServiceAreas from "@/components/ServiceAreas";
+import ScrollTop from "@/components/controls/ScrollTop";
 
 export default function Home() {
   return (
     <>
+    <ScrollTop /> 
       <Navbar />
       <Hero />
       <Services />

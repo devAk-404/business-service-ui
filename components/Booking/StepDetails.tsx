@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
+
 export default function StepDetails({ data, setData, next, back }: any) {
+    const [confirmOpen, setConfirmOpen] = useState(false);
   return (
+    <>
     <div className="bg-white p-6 md:p-8 rounded-2xl 
                     shadow-[0_10px_30px_rgba(0,0,0,0.06)] 
                     border border-gray-100 space-y-5">
@@ -83,17 +87,69 @@ export default function StepDetails({ data, setData, next, back }: any) {
 
         {/* CONFIRM */}
         <button
-          onClick={next}
-          disabled={!data.name || !data.phone || !data.address || !data.agree}
-          className="flex-1 py-3 rounded-lg 
-                     bg-emerald-600 text-white font-medium
-                     shadow-sm hover:bg-emerald-700 hover:shadow-md 
-                     transition disabled:opacity-50 disabled:cursor-not-allowed"
+  onClick={() => setConfirmOpen(true)}
+  disabled={!data.name || !data.phone || !data.address || !data.agree}
+  className="flex-1 py-3 rounded-lg 
+             bg-emerald-600 text-white font-medium
+             shadow-sm hover:bg-emerald-700 hover:shadow-md 
+             transition disabled:opacity-50 disabled:cursor-not-allowed"
+>
+  Confirm Appointment →
+</button>
+      </div>
+    </div>
+
+    {confirmOpen && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+    {/* BACKDROP */}
+    <div
+      className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+      onClick={() => setConfirmOpen(false)}
+    />
+
+    {/* MODAL */}
+    <div className="relative bg-white w-[90%] max-w-md rounded-2xl shadow-xl p-6">
+
+      <h3 className="text-lg font-semibold text-gray-900 text-center">
+        Confirm Booking
+      </h3>
+
+      <p className="text-sm text-gray-500 text-center mt-2">
+        Are you sure you want to book this appointment?
+      </p>
+
+      {/* SUMMARY (premium touch) */}
+      <div className="mt-4 text-sm text-gray-700 space-y-1 bg-gray-50 p-3 rounded-lg">
+        <p><b>Service:</b> {data.service}</p>
+        <p><b>Date:</b> {data.date}</p>
+        <p><b>Time:</b> {data.time}</p>
+      </div>
+
+      {/* ACTIONS */}
+      <div className="flex gap-3 mt-6">
+
+        <button
+          onClick={() => setConfirmOpen(false)}
+          className="flex-1 py-2.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
         >
-          Confirm →
+          Cancel
+        </button>
+
+        <button
+          onClick={() => {
+            setConfirmOpen(false);
+            next(); // FINAL SUBMIT
+          }}
+          className="flex-1 py-2.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700"
+        >
+          Yes, Confirm
         </button>
 
       </div>
     </div>
+  </div>
+)}
+    </>
   );
 }
