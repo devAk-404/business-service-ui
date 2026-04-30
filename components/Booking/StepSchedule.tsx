@@ -1,7 +1,15 @@
 "use client";
 
+import { Calendar } from "lucide-react";
+
 export default function StepSchedule({ data, setData, next, back }: any) {
-  const slots = ["08:00", "10:00", "12:00", "02:00", "04:00"];
+  const slots = [
+  { label: "8:00 AM - 10:00 AM", value: "08:00-10:00" },
+  { label: "10:00 AM - 12:00 PM", value: "10:00-12:00" },
+  { label: "12:00 PM - 2:00 PM", value: "12:00-14:00" },
+  { label: "2:00 PM - 4:00 PM", value: "14:00-16:00" },
+  { label: "4:00 PM - 6:00 PM", value: "16:00-18:00" },
+];
 
   return (
     <div className="bg-white p-6 md:p-8 rounded-2xl 
@@ -14,37 +22,46 @@ export default function StepSchedule({ data, setData, next, back }: any) {
       </h2>
 
       {/* DATE INPUT */}
-      <input
-        type="date"
-        value={data.date}
-        onChange={(e) => setData({ ...data, date: e.target.value })}
-        className="w-full px-4 py-3 rounded-lg 
-                   bg-white text-gray-900
-                   border border-gray-300
-                   focus:outline-none focus:ring-2 focus:ring-emerald-500 
-                   focus:border-emerald-500 transition"
-      />
+     <div className="relative">
+  <input
+    type="text"
+    placeholder="Select date (MM/DD/YYYY)"
+    value={data.date}
+    onFocus={(e) => (e.target.type = "date")}
+    onBlur={(e) => {
+      if (!e.target.value) e.target.type = "text";
+    }}
+    onChange={(e) => setData({ ...data, date: e.target.value })}
+    className="w-full px-4 py-3 rounded-lg 
+               bg-white text-gray-900 placeholder-gray-500
+               border border-gray-300
+               focus:outline-none focus:ring-2 focus:ring-emerald-500 
+               focus:border-emerald-500 transition pr-10"
+  />
+
+  
+</div>
 
       {/* TIME SLOTS */}
-      <div className="grid grid-cols-3 gap-3">
-        {slots.map((t) => {
-          const active = data.time === t;
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+  {slots.map((slot) => {
+    const active = data.time === slot.value;
 
-          return (
-            <button
-              key={t}
-              onClick={() => setData({ ...data, time: t })}
-              className={`py-2.5 rounded-lg text-sm font-medium border transition
-                ${active
-                  ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
-                  : "bg-white text-gray-700 border-gray-300 hover:border-emerald-400 hover:bg-emerald-50"
-                }`}
-            >
-              {t}
-            </button>
-          );
-        })}
-      </div>
+    return (
+      <button
+        key={slot.value}
+        onClick={() => setData({ ...data, time: slot.value })}
+        className={`py-3 px-3 rounded-lg text-sm font-medium border transition text-center
+          ${active
+            ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
+            : "bg-white text-gray-800 border-gray-300 hover:border-emerald-500 hover:bg-emerald-50"
+          }`}
+      >
+        {slot.label}
+      </button>
+    );
+  })}
+</div>
 
       {/* ACTIONS */}
       <div className="flex gap-3 pt-2">
