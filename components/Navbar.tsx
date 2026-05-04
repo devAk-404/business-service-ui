@@ -73,7 +73,12 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <nav className="
+  sticky top-0 z-50
+  bg-white
+  border-b border-gray-200
+  shadow-[0_4px_20px_rgba(0,0,0,0.06)]
+">
 
       {/* HEADER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
